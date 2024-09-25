@@ -19,7 +19,10 @@ app.get("/", function (req, res) {
 });
 
 function convertDate(dateString) {
-  return new Date(dateString);
+  const newDateString = dateString.includes("-")
+    ? dateString
+    : Number(dateString);
+  return new Date(newDateString);
 }
 
 // your first API endpoint...
