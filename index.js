@@ -19,11 +19,18 @@ app.get("/", function (req, res) {
 });
 
 function convertDate(dateString) {
+  if (dateString instanceof Date) return dateString;
   const newDateString = dateString.includes("-")
     ? dateString
     : Number(dateString);
   return new Date(newDateString);
 }
+
+app.get("/api", function (req, res) {
+  const date = convertDate(new Date());
+
+  res.json({ unix: date.getTime(), utc: date.toUTCString() });
+});
 
 // your first API endpoint...
 app.get("/api/:date", function (req, res) {
