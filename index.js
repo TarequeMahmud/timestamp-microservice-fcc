@@ -20,6 +20,7 @@ app.get("/", function (req, res) {
 
 function convertDate(dateString) {
   if (dateString instanceof Date) return dateString;
+  if (dateString.includes("GMT")) return new Date(dateString);
   const newDateString = dateString.includes("-")
     ? dateString
     : Number(dateString);
